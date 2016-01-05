@@ -28,6 +28,8 @@ void main()
 	string firstIn;
 	string secondIn;
 	const int timeLimit = 4;
+	const int minTimeLength = 2;
+	const int maxTime = 2400;
 
 	//Prompt user to input times and set variables to user input values
 	cout << "Please enter the first time" << endl;
@@ -42,17 +44,18 @@ void main()
 	secondLength = secondIn.length();
 
 	//Check if input lengths exceed military time format
-	if (firstLength > timeLimit || secondLength > timeLimit) {
+	if (firstLength > timeLimit || secondLength > timeLimit || firstLength < minTimeLength || secondLength < minTimeLength) {
 		//Inform user that entered times were invalid
-		cout << "The time you entered is not in military time format" << endl;
-		cout << "Either " << firstLength << " or " << secondLength << " is more than " << timeLimit << " integers" << endl;
+		cout << "Error: Times must be entered in the xxxx miltary format" << endl;
 		cout << "Press any key to continue" << endl;
 		cin >> flag;
 		return;
-	}
-
-	//On input of correctly formatted times calculate difference
-	else {
+	} else if ( firstTime > maxTime || secondTime > maxTime ) {
+		cout << "Error: Times cannot exceed 2400!" << endl;
+		cout << "Press any key to continue" << endl;
+		cin >> flag;
+		return;
+	} else {
 		//Check which time is greater to ensure correct calculation for all scenarios
 		if (firstTime > secondTime) {
 			difference = firstTime - secondTime;
